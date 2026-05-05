@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Coin Flip Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .balance {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    .play-btn {
+      background: #2ecc71;
+      color: white;
+    }
+
+    .withdraw-btn {
+      background: #e74c3c;
+      color: white;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>💰 Coin Flip Game</h1>
+  <div class="balance">Balance: <span id="balance">100000</span> coins</div>
+
+  <button class="play-btn" onclick="playGame()">Try Your Luck</button>
+  <br>
+  <button class="withdraw-btn" onclick="withdraw()">Withdraw (Reset)</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    let balance = 100000;
+
+    function updateDisplay() {
+      document.getElementById("balance").innerText = balance;
+    }
+
+    function playGame() {
+      if (balance <= 0) {
+        document.getElementById("result").innerText = "You have no coins left!";
+        return;
+      }
+
+      let win = Math.random() < 0.5;
+
+      if (win) {
+        balance += 100000;
+        document.getElementById("result").innerText = "🎉 You WON 100,000 coins!";
+      } else {
+        balance = 0;
+        document.getElementById("result").innerText = "💀 You LOST everything!";
+      }
+
+      updateDisplay();
+    }
+
+    function withdraw() {
+      alert("You withdrew " + balance + " coins!");
+      balance = 100000;
+      updateDisplay();
+      document.getElementById("result").innerText = "";
+    }
+
+    updateDisplay();
+  </script>
+
+</body>
+</html>
